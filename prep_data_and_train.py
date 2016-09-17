@@ -13,7 +13,7 @@ text = open("all_lyrics_kanye.txt").read().lower()
 print 'corpus length:', len(text)
 
 
-text = text[:100000]
+# text = text[:500000]
 
 chars = sorted(list(set(text)))
 print 'total chars:', len(chars)
