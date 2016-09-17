@@ -66,7 +66,13 @@ try:
         print()
         print('-' * 50)
         print('Iteration', iteration)
-        model.fit(X, y, batch_size=128, nb_epoch=1)
+        for batch in range(10):
+            print("on batch %s / 10" % (batch + 1))
+            batch_size = X.shape[0] / 10
+            slice_X = X[batch * batch_size: (batch + 1) * batch_size]
+            slice_y = y[batch * batch_size: (batch + 1) * batch_size]
+
+            model.fit(slice_X, slice_y, batch_size=128, nb_epoch=1)
 
         start_index = random.randint(0, len(text) - maxlen - 1)
 
