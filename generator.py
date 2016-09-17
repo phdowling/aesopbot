@@ -2,7 +2,9 @@ import keras
 import random
 import numpy as np
 import sys
+import requests
 
+URL = "http://philippd.me:8080/new_lyrics"
 
 text = u""
 for line in open("all_lyrics_kanye.txt"):
@@ -49,7 +51,7 @@ def sample(preds, temperature=1.0):
 
 def generate_bars():
     start_index = random.randint(0, len(text) - maxlen - 1)
-    for diversity in [0.2, 0.5, 1.0, 1.2]:
+    for diversity in [0.7, 1.0, 1.1]:
         print()
         print('----- diversity:', diversity)
         generated = ''
@@ -74,6 +76,14 @@ def generate_bars():
             yield next_char, "GEN"
         print()
 
+
 def run():
     while True:
+        print "seeding.."
         for seq, source in generate_bars():
+            print "sending %s (%s)" % (seq, source)
+            requests.post(URL, json={"lyrics": seq, "isGenerated": source == "GEN"})
+
+
+if __name__ == "__main__":
+    run()

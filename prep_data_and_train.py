@@ -1,4 +1,3 @@
-from __future__ import print_function
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
 from keras.layers import LSTM
@@ -8,15 +7,19 @@ import numpy as np
 import random
 import sys
 
+print "read data.."
 text = u""
 for line in open("all_lyrics_kanye.txt"):
     if "google" not in line.lower():
         text += line.decode("utf-8")
 
-print('corpus length:', len(text))
+print 'corpus length:', len(text)
+
+
+text = text[:100000]
 
 chars = sorted(list(set(text)))
-print('total chars:', len(chars))
+print 'total chars:', len(chars)
 char_indices = dict((c, i) for i, c in enumerate(chars))
 indices_char = dict((i, c) for i, c in enumerate(chars))
 
@@ -28,9 +31,9 @@ next_chars = []
 for i in range(0, len(text) - maxlen, step):
     sentences.append(text[i: i + maxlen])
     next_chars.append(text[i + maxlen])
-print('nb sequences:', len(sentences))
+print 'nb sequences:', len(sentences)
 
-print('Vectorization...')
+print 'Vectorization...'
 X = np.zeros((len(sentences), maxlen, len(chars)), dtype=np.bool)
 y = np.zeros((len(sentences), len(chars)), dtype=np.bool)
 for i, sentence in enumerate(sentences):
@@ -40,7 +43,7 @@ for i, sentence in enumerate(sentences):
 
 
 # build the model: a single LSTM
-print('Build model...')
+print 'Build model...'
 model = Sequential()
 model.add(LSTM(128, input_shape=(maxlen, len(chars)), return_sequences=True))
 model.add(LSTM(128, input_shape=(maxlen, len(chars))))
@@ -63,11 +66,11 @@ def sample(preds, temperature=1.0):
 # train the model, output generated text after each iteration
 try:
     for iteration in range(1, 60):
-        print()
-        print('-' * 50)
-        print('Iteration', iteration)
+        print
+        print '-' * 50
+        print 'Iteration', iteration
         for batch in range(10):
-            print("on batch %s / 10" % (batch + 1))
+            print "on batch %s / 10" % (batch + 1)
             batch_size = X.shape[0] / 10
             slice_X = X[batch * batch_size: (batch + 1) * batch_size]
             slice_y = y[batch * batch_size: (batch + 1) * batch_size]
@@ -77,13 +80,13 @@ try:
         start_index = random.randint(0, len(text) - maxlen - 1)
 
         for diversity in [0.2, 0.5, 1.0, 1.2]:
-            print()
-            print('----- diversity:', diversity)
+            print
+            print '----- diversity:', diversity
 
             generated = ''
             sentence = text[start_index: start_index + maxlen]
             generated += sentence
-            print('----- Generating with seed: "' + sentence + '"')
+            print '----- Generating with seed: "' + sentence + '"'
             sys.stdout.write(generated)
 
             for i in range(400):
@@ -100,7 +103,7 @@ try:
 
                 sys.stdout.write(next_char)
                 sys.stdout.flush()
-            print()
+            print
 except KeyboardInterrupt:
     pass
 
