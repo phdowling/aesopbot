@@ -90,7 +90,7 @@ def run():
         print "seeding.."
         for seq, source in generate_bars():
             #print u"sending %s (%s)" % (seq, source)
-            res = requests.post(URL, data=json.dumps({u"lyrics": seq, u"isGenerated": source == u"GEN"}))
+            res = requests.post(URL, json={u"lyrics": seq, u"isGenerated": source == u"GEN"})
 
 
 if __name__ == "__main__":
