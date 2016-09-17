@@ -5,7 +5,7 @@ import numpy as np
 import sys
 import requests
 
-URL = "http://philippd.me/new_lyrics"
+URL = "http://localhost:80/new_lyrics"
 
 
 print "read data.."
