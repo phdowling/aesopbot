@@ -13,6 +13,7 @@ router.post('/new_lyrics', function (req, res, next) {
   var lyrics = req.body.lyrics;
   var isGenerated = req.body.isGenerated;
   res.io.sockets.emit(isGenerated? "lyrics": "seed", lyrics)
+  res.send("Okay");
 });
 
 
