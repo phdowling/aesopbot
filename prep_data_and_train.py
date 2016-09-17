@@ -7,9 +7,17 @@ import numpy as np
 import random
 import sys
 
-print "read data.."
-text = open("all_lyrics_kanye.txt").read().lower()
 
+lines = []
+
+print "read data.."
+
+with open("all_lyrics_kanye.txt") as inf:
+    for line in inf:
+        if "google" not in line:
+            lines.append(unicode(line, errors='ignore').lower())
+
+text = u"\n".join(lines)
 print 'corpus length:', len(text)
 
 
