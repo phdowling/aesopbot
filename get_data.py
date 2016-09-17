@@ -26,6 +26,7 @@ def iterate_artist_songs(artist_id):
 
     while res["response"]["next_page"]:
         page += 1
+        print "On page %s" % page
         next_page = artists_url % (artist_id, page + 1)
         res = json.loads(requests.get(next_page).content)
         for song in res["response"]["songs"]:
@@ -41,5 +42,7 @@ ARTISTS = {
 if __name__ == "__main__":
     ARTIST = "Kanye West"
     with codecs.open("all_lyrics_kanye.txt", "w", "utf-8") as outf:
-        for lyrics in iterate_artist_songs(ARTISTS[ARTIST]):
+        for idx, lyrics in enumerate(iterate_artist_songs(ARTISTS[ARTIST])):
+            if idx % 500 == 0:
+                print "got %s lyrics.." % idx
             outf.write(lyrics + u"\n\n\n")
