@@ -11,12 +11,12 @@ socket.on("general", function (data) {
 socket.on("lyrics", function (data) {
     console.log("GEN: " + JSON.stringify(data));
     var container = $(".container");
-    container.innerText = container.innerText + data.lyrics;
+    container.innerText = container.innerText + data;
 });
 
 socket.on("seed", function (data) {
     console.log("SEED: " + JSON.stringify(data));
     var container = $(".container");
     container.empty();
-    container.innerText = data.lyrics;
+    container.innerText = data;
 });
