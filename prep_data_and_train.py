@@ -8,10 +8,7 @@ import random
 import sys
 
 print "read data.."
-text = u""
-for line in open("all_lyrics_kanye.txt"):
-    if "google" not in line.lower():
-        text += line.decode("utf-8")
+text = open("all_lyrics_kanye.txt").read().lower()
 
 print 'corpus length:', len(text)
 
