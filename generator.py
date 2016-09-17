@@ -15,8 +15,8 @@ print 'corpus length:', len(text)
 
 text = text[:600000]
 
-model = keras.models.model_from_json("trained_kanye.model")
-model.load_weights("trained_kanye.model.weights")
+model = keras.models.load_model("trained_kanye.model")
+# model.load_weights("trained_kanye.model.weights")
 
 print('corpus length:', len(text))
 
@@ -42,6 +42,7 @@ for i, sentence in enumerate(sentences):
     for t, char in enumerate(sentence):
         X[i, t, char_indices[char]] = 1
     y[i, char_indices[next_chars[i]]] = 1
+
 
 def sample(preds, temperature=1.0):
     # helper function to sample an index from a probability array
