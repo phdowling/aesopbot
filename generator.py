@@ -88,7 +88,7 @@ def generate_bars():
             sys.stdout.write(next_char)
             sys.stdout.flush()
 
-            yield unicode(next_char, errors='ignore'), u"GEN"
+            yield next_char, u"GEN"
         print
 
 
