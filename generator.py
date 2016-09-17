@@ -15,7 +15,7 @@ print "read data.."
 with open("all_lyrics_kanye.txt") as inf:
     for line in inf:
         if "google" not in line:
-            lines.append(line.lower())
+            lines.append(unicode(line, errors='ignore').lower())
 
 text = u"\n".join(lines)
 
