@@ -10,7 +10,7 @@ socket.on("general", function (data) {
 
 socket.on("lyrics", function (data) {
     //console.log("GEN: " + JSON.stringify(data));
-    var htmlIzed = "<span class='seed'>" + data.replace(/(?:\r\n|\r|\n)/g, '<br />') + "</span>>";
+    var htmlIzed = "<span class='seed'>" + data.replace(/(?:\r\n|\r|\n)/g, '<br />') + "</span>";
     var container = $(".container");
     container.html(container.html() + htmlIzed);
 });

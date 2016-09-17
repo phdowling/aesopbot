@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.io.emit("general", "Hello!");
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'AesopBot' });
 });
 
 router.post('/new_lyrics', function (req, res, next) {
