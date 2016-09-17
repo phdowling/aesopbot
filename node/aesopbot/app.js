@@ -14,10 +14,16 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-/*io.on("connection", function (socket) {
+// socket.io middleware
+app.use(function(req, res, next){
+  res.io = io;
+  next();
+});
+
+io.on("connection", function (socket) {
   console.log("Got connection!");
   socket.emit("general", "Hello!");
-});*/
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +37,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/', routes);
 app.use('/users', users);
 
@@ -41,11 +49,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// socket.io middleware
-app.use(function(req, res, next){
-  res.io = io;
-  next();
-});
+
 
 // error handlers
 
@@ -70,6 +74,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 module.exports = {app: app, server: server};

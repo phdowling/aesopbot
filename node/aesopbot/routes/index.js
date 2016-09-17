@@ -3,7 +3,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log("Got connection!");
   res.io.emit("general", "Hello!");
   res.render('index', { title: 'Express' });
 });
