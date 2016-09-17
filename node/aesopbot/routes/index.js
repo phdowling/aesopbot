@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var io = require("socket.io")(3000);
+var app = require("../app");
 
-io.on("connection", function (socket) {
+app.io.on("connection", function (socket) {
   socket.emit("general", "Hello!");
 });
 
