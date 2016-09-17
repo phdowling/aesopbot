@@ -80,7 +80,7 @@ def generate_bars():
             sys.stdout.write(next_char)
             sys.stdout.flush()
 
-            yield next_char, "GEN"
+            yield unicode(next_char), u"GEN"
         print
 
 
@@ -89,7 +89,7 @@ def run():
         print "seeding.."
         for seq, source in generate_bars():
             #print u"sending %s (%s)" % (seq, source)
-            res = requests.post(URL, json={"lyrics": seq, "isGenerated": source == "GEN"})
+            res = requests.post(URL, json={u"lyrics": seq, u"isGenerated": source == u"GEN"})
 
 
 if __name__ == "__main__":
