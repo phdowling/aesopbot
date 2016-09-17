@@ -10,13 +10,16 @@ socket.on("general", function (data) {
 
 socket.on("lyrics", function (data) {
     console.log("GEN: " + JSON.stringify(data));
+    var htmlIzed = data.replace(/(?:\r\n|\r|\n)/g, '<br />');
     var container = $(".container");
-    container.text(container.text() + data);
+    container.html(container.html() + htmlIzed);
 });
 
 socket.on("seed", function (data) {
     console.log("SEED: " + JSON.stringify(data));
+    var htmlIzed = data.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
     var container = $(".container");
     container.empty();
-    container.text(data);
+    container.html(htmlIzed);
 });
