@@ -8,6 +8,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/new_lyrics', function (req, res, next) {
+  console.log("New lyrics!");
+  console.log(JSON.stringify(req.body));
   var lyrics = req.body.lyrics;
   var isGenerated = req.body.isGenerated;
   res.io.sockets.emit(isGenerated? "lyrics": "seed", lyrics)
