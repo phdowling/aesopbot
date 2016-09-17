@@ -22,6 +22,7 @@ model = load_model("trained_kanye.model")
 print('corpus length:', len(text))
 
 chars = sorted(list(set(text)))
+chars += ["X"] * (143 - len(chars))
 print('total chars:', len(chars))
 char_indices = dict((c, i) for i, c in enumerate(chars))
 indices_char = dict((i, c) for i, c in enumerate(chars))
