@@ -4,6 +4,7 @@ import random
 import numpy as np
 import sys
 import requests
+import json
 
 URL = "http://localhost:80/new_lyrics"
 
@@ -80,7 +81,7 @@ def generate_bars():
             sys.stdout.write(next_char)
             sys.stdout.flush()
 
-            yield next_char.encode("utf-8"), u"GEN"
+            yield next_char, u"GEN"
         print
 
 
@@ -89,7 +90,7 @@ def run():
         print "seeding.."
         for seq, source in generate_bars():
             #print u"sending %s (%s)" % (seq, source)
-            res = requests.post(URL, json={u"lyrics": seq, u"isGenerated": source == u"GEN"})
+            res = requests.post(URL, data=json.dumps({u"lyrics": seq, u"isGenerated": source == u"GEN"}))
 
 
 if __name__ == "__main__":
