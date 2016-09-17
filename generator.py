@@ -5,6 +5,7 @@ import numpy as np
 import sys
 import requests
 import json
+import time
 
 URL = "http://localhost:80/new_lyrics"
 
@@ -95,9 +96,17 @@ def generate_bars():
 def run():
     while True:
         print "seeding.."
+
         for seq, source in generate_bars():
             #print u"sending %s (%s)" % (seq, source)
-            res = requests.post(URL, json={u"lyrics": seq, u"isGenerated": source == u"GEN"})
+            try:
+                res = requests.post(URL, json={u"lyrics": seq, u"isGenerated": source == u"GEN"})
+            except:
+                print "Error sending!"
+                time.sleep(3)
+                pass
+
+        time.sleep(3)
 
 
 if __name__ == "__main__":
