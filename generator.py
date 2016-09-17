@@ -6,10 +6,14 @@ import requests
 
 URL = "http://philippd.me:8080/new_lyrics"
 
-text = u""
-for line in open("all_lyrics_kanye.txt"):
-    if "google" not in line.lower():
-        text += line.decode("utf-8")
+
+print "read data.."
+text = open("all_lyrics_kanye.txt").read().lower()
+
+print 'corpus length:', len(text)
+
+
+text = text[:600000]
 
 model = keras.models.model_from_json("trained_kanye.model")
 model.load_weights("trained_kanye.model.weights")
