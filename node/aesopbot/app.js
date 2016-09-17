@@ -11,7 +11,12 @@ var users = require('./routes/users');
 
 var app = express();
 
-var io = require("socket.io")(app);
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+io.on("connection", function (socket) {
+  socket.emit("general", "Hello!");
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +38,12 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
+});
+
+// socket.io middleware
+app.use(function(req, res, next){
+  res.io = io;
+  next();
 });
 
 // error handlers
@@ -60,4 +71,4 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+module.exports = {app: app, server: server};
