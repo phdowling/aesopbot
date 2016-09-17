@@ -8,9 +8,16 @@ import json
 
 URL = "http://localhost:80/new_lyrics"
 
+lines = []
 
 print "read data.."
-text = open("all_lyrics_kanye.txt").read().lower()
+
+with open("all_lyrics_kanye.txt") as inf:
+    for line in inf:
+        if "google" not in line:
+            lines.append(line.lower())
+
+text = u"\n".join(lines)
 
 print 'corpus length:', len(text)
 
