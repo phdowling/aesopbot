@@ -3,8 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log("Got connection!");
+  socket.emit("general", "Hello!");
   res.render('index', { title: 'Express' });
-
 });
 
 router.post('/new_lyrics', function (req, res, next) {
