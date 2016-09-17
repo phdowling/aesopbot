@@ -101,7 +101,7 @@ def run():
             #print u"sending %s (%s)" % (seq, source)
             try:
                 res = requests.post(URL, json={u"lyrics": seq, u"isGenerated": source == u"GEN"})
-                time.sleep(0.1)
+                time.sleep(0.05)
             except:
                 print "Error sending!"
                 time.sleep(3)
