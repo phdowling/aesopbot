@@ -57,14 +57,14 @@ def sample(preds, temperature=1.0):
 
 def generate_bars():
     start_index = random.randint(0, len(text) - maxlen - 1)
-    for diversity in [0.7, 1.0, 1.1]:
-        print()
-        print('----- diversity:', diversity)
+    for diversity in [0.8, 1.0, 1.1, 1.4]:
+        print
+        print '----- diversity:', diversity
         generated = ''
         sentence = text[start_index: start_index + maxlen]
         yield sentence, "SEED"
         generated += sentence
-        print('----- Generating with seed: "' + sentence + '"')
+        print '----- Generating with seed: "' + sentence + '"'
         sys.stdout.write(generated)
         for i in range(400):
             x = np.zeros((1, maxlen, len(chars)))
@@ -80,7 +80,7 @@ def generate_bars():
             sys.stdout.flush()
 
             yield next_char, "GEN"
-        print()
+        print
 
 
 def run():
@@ -88,7 +88,7 @@ def run():
         print "seeding.."
         for seq, source in generate_bars():
             print "sending %s (%s)" % (seq, source)
-            res = requests.post(URL, json={"lyrics": seq, "isGenerated": source == "GEN"})
+            # res = requests.post(URL, json={"lyrics": seq, "isGenerated": source == "GEN"})
 
 
 if __name__ == "__main__":
