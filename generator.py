@@ -1,4 +1,5 @@
 import keras
+from keras.models import load_model
 import random
 import numpy as np
 import sys
@@ -15,7 +16,7 @@ print 'corpus length:', len(text)
 
 text = text[:600000]
 
-model = keras.models.load_model("trained_kanye.model")
+model = load_model("trained_kanye.model")
 # model.load_weights("trained_kanye.model.weights")
 
 print('corpus length:', len(text))
