@@ -17,6 +17,6 @@ socket.on("lyrics", function (data) {
 socket.on("seed", function (data) {
     console.log("SEED: " + JSON.stringify(data));
     var container = $(".container");
-    container.clear();
+    container.empty();
     container.innerText = data.lyrics;
 });
